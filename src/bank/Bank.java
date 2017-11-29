@@ -1,75 +1,68 @@
 package bank;
 
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.Dimension;
+
+
 
 
 public class Bank {
 
-	private JFrame frame;
-
+	public Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Bank window = new Bank();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public Bank() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.ORANGE);
-		frame.setBounds(250, 100, 400, 300);
+		//Creates a frame with a login button and a register button
+		JFrame frame = new JFrame("Bank App");
+		frame.setSize(300, 200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		JPanel mainframe = new JPanel();
+		frame.add(mainframe);
+		placeComponents(mainframe);
+		
+		frame.setVisible(true);
+	}
+
+	private static void placeComponents(JPanel mainframe) {
+		// Add components to to mainframe
+		mainframe.setLayout(null);
+		
+		//If the login button is clicked open the login frame
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(0, 0, 100, 50);
+		btnLogin.setBounds(160, 130, 200, 80);
+		mainframe.add(btnLogin);
+	
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "You will need to enter your login id and pin");
 				ClientLoginFrame clientLogin = new ClientLoginFrame();
 				clientLogin.setVisible(true);
-				frame.dispose();
 			}
 		});
-		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel1 = new JLabel("");
-		lblNewLabel1.setBounds(0, 100, 100, 50);
-		frame.getContentPane().add(lblNewLabel1);
-		frame.getContentPane().add(btnLogin);
-		
-		
+		//If the register button is clicked open the register frame
 		JButton btnRegister = new JButton("Register");
-		JLabel lblNewLabel2 = new JLabel("");
-		btnRegister.setBounds(0, 200, 100, 50);
-		frame.getContentPane().add(lblNewLabel2);
-		frame.getContentPane().add(btnRegister);
+		btnRegister.setBounds(160, 230, 200, 80);
+		mainframe.add(btnRegister);
 		
 		
 		btnRegister.addActionListener(new ActionListener()
@@ -77,12 +70,12 @@ public class Bank {
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(null, "This app allows new clients to be created. Once you are registered you can use: Online Banking and Invest");
 				RegisterWindow registerWindow = new RegisterWindow();
-				registerWindow.setVisible(true);
-				frame.dispose();
+				registerWindow.main(args);
+				
 			}
 		});
-		
 		
 	}
 
 }
+
