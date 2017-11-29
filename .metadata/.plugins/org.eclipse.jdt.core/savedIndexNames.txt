@@ -1,0 +1,1 @@
+INDEX VERSION 1.129+/Users/liandragiacomine/Documents/workspace/Programming/java/Bank/.metadata/.plugins/org.eclipse.jdt.core
